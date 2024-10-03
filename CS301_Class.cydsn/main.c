@@ -22,7 +22,7 @@
 #include "defines.h"
 #include "vars.h"
 #include "tacho.h"
-#include "windowRoller.h"
+#include "window_roller.h"
 #include "controlMotor.h"
 #include "distance.h"
 //* ========================================
@@ -43,7 +43,6 @@ struct rollingWindow sampleBufferQ4;
 struct rollingWindow sampleBufferQ1;
 struct rollingWindow sampleBufferQ3;
 struct rollingWindow sampleBufferQ2;
-uint16_t counter = 0;
 uint16_t Q5 = 0;
 uint16_t Q6 = 0;
 uint16_t Q4 = 0;
@@ -136,122 +135,122 @@ int main()
             
 
                 
-                // calculate the peak to peak of the sensor waveform
-                peakQ5 = maxValQ5 - minValQ5;
-                peakQ6 = maxValQ6 - minValQ6;
-                peakQ4 = maxValQ4 - minValQ4;
-                peakQ2 = maxValQ2 - minValQ2;
-                peakQ3 = maxValQ3 - minValQ3;
-                peakQ1 = maxValQ1 - minValQ1;
-                
-                // reset the max and min values for the next time sampling 
-                maxValQ5 = 0;
-                minValQ5 = 5000;
-
-                maxValQ6 = 0;
-                minValQ6 = 5000;
-
-                maxValQ2 = 0;
-                minValQ2 = 5000;
-
-                maxValQ4 = 0;
-                minValQ4 = 5000;
-
-                maxValQ1 = 0;
-                minValQ1 = 5000;
-
-                maxValQ3 = 0;
-                minValQ3 = 5000;
-                
-                
-                // if the sensor peak to peak is less than 70mV, the sensor is under black
-                if(peakQ5 < 300)
-                {
-                    // Turn off the LED
-                    Q5_LED_Write(0);
-                    Q5 = 0;
-                }
-                else
-                {
-                    // Turn on the LED
-                    Q5_LED_Write(1);
-                    Q5 = 1;
-                    
-                }
-                
-                if(peakQ2 < 500)
-                {
-                    // Turn off the LED
-                    Q2_LED_Write(0);
-                    Q2 = 0;
-                }
-                else
-                {
-                    // Turn on the LED
-                    Q2_LED_Write(1);
-                    Q2 = 1;
-                    
-                }
-                
-                if(peakQ4 < 300)
-                {
-                    // Turn off the LED
-                    Q4_LED_Write(0);
-                    Q4 = 0;
-                  
-                }
-                else
-                {
-                    // Turn on the LED
-                    Q4_LED_Write(1);
-                    Q4 = 1;
-                }  
-                
-                
-                if(peakQ6 < 300)
-                {
-                    Q6_LED_Write(0);
-                    Q6 =0;
-                }
-                else
-                {
-                    Q6_LED_Write(1);
-                    Q6 = 1;
-                }
-
-
-                if(peakQ1 < 300)
-                {
-                    Q1_LED_Write(0);
-                    Q1 =0;
-                }
-                else
-                {
-                    Q1_LED_Write(1);
-                    Q1 = 1;
-                }
-
-
-                if(peakQ3 < 300)
-                {
-                    //Q3_LED_Write(0);
-                    Q3 =0;
-                  
-                }
-                else
-                {
-                    //Q3_LED_Write(1);
-                    Q3 = 1;
-                }
-               
+            // calculate the peak to peak of the sensor waveform
+            peakQ5 = maxValQ5 - minValQ5;
+            peakQ6 = maxValQ6 - minValQ6;
+            peakQ4 = maxValQ4 - minValQ4;
+            peakQ2 = maxValQ2 - minValQ2;
+            peakQ3 = maxValQ3 - minValQ3;
+            peakQ1 = maxValQ1 - minValQ1;
             
-               
-                new_result = 0;
-                char buffer[64];
-                sprintf(buffer, "Value1: %d , Value2: %d \r\n" , quad1, quad2);
+            // reset the max and min values for the next time sampling 
+            maxValQ5 = 0;
+            minValQ5 = 5000;
 
-                usbPutString(buffer);
+            maxValQ6 = 0;
+            minValQ6 = 5000;
+
+            maxValQ2 = 0;
+            minValQ2 = 5000;
+
+            maxValQ4 = 0;
+            minValQ4 = 5000;
+
+            maxValQ1 = 0;
+            minValQ1 = 5000;
+
+            maxValQ3 = 0;
+            minValQ3 = 5000;
+            
+            
+            // if the sensor peak to peak is less than 70mV, the sensor is under black
+            if(peakQ5 < 300)
+            {
+                // Turn off the LED
+                Q5_LED_Write(0);
+                Q5 = 0;
             }
+            else
+            {
+                // Turn on the LED
+                Q5_LED_Write(1);
+                Q5 = 1;
+                
+            }
+            
+            if(peakQ2 < 500)
+            {
+                // Turn off the LED
+                Q2_LED_Write(0);
+                Q2 = 0;
+            }
+            else
+            {
+                // Turn on the LED
+                Q2_LED_Write(1);
+                Q2 = 1;
+                
+            }
+            
+            if(peakQ4 < 300)
+            {
+                // Turn off the LED
+                Q4_LED_Write(0);
+                Q4 = 0;
+                
+            }
+            else
+            {
+                // Turn on the LED
+                Q4_LED_Write(1);
+                Q4 = 1;
+            }  
+            
+            
+            if(peakQ6 < 300)
+            {
+                Q6_LED_Write(0);
+                Q6 =0;
+            }
+            else
+            {
+                Q6_LED_Write(1);
+                Q6 = 1;
+            }
+
+
+            if(peakQ1 < 300)
+            {
+                Q1_LED_Write(0);
+                Q1 =0;
+            }
+            else
+            {
+                Q1_LED_Write(1);
+                Q1 = 1;
+            }
+
+
+            if(peakQ3 < 300)
+            {
+                //Q3_LED_Write(0);
+                Q3 =0;
+                
+            }
+            else
+            {
+                //Q3_LED_Write(1);
+                Q3 = 1;
+            }
+            
+        
+            
+            new_result = 0;
+            char buffer[64];
+            sprintf(buffer, "Value1: %d , Value2: %d \r\n" , quad1, quad2);
+
+            usbPutString(buffer);
+        }
         
         //get_speed();
  
@@ -296,7 +295,6 @@ void whiteOrBlack(){
     addElement(&sampleBufferQ2, resultQ2);
     addElement(&sampleBufferQ1, resultQ1);
 
-   
     // Update max and min values
     for(int i=0; i < WINDOW_SIZE; i++) {
         uint16_t numQ5 = sampleBufferQ5.data[i];

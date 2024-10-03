@@ -10,7 +10,8 @@
  * ========================================
 */
 
-#include <project.h>
+#include <stdint.h>
+
 #define WINDOW_SIZE 10
 
 struct rollingWindow {
