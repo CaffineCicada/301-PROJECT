@@ -20,7 +20,7 @@ struct RollingWindow {
 };
 
 // Function to initialize a rollingWindow
-struct RollingWindow window_new() {
+struct RollingWindow newWindow() {
     struct RollingWindow output;
     // Initialize all data elements to 0 and set index i to 0
     for(int i=0; i < WINDOW_SIZE; i++) {
