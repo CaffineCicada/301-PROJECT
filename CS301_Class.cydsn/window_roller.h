@@ -14,14 +14,14 @@
 
 #define WINDOW_SIZE 10
 
-struct rollingWindow {
+struct RollingWindow {
     int16_t data[WINDOW_SIZE];
     uint16_t i;
 };
 
 // Function to initialize a rollingWindow
-struct rollingWindow window_new() {
-    struct rollingWindow output;
+struct RollingWindow window_new() {
+    struct RollingWindow output;
     // Initialize all data elements to 0 and set index i to 0
     for(int i=0; i < WINDOW_SIZE; i++) {
         output.data[i]=0;
@@ -31,7 +31,7 @@ struct rollingWindow window_new() {
 }
 
 // Function to add an element to the buffer
-void addElement(struct rollingWindow* buffer, int16_t num) { 
+void addElement(struct RollingWindow* buffer, int16_t num) { 
     buffer->data[buffer->i] = num;
     // Update position i, wrap around if i reaches WINDOW_SIZE
     buffer->i = (buffer->i + 1) % WINDOW_SIZE;
