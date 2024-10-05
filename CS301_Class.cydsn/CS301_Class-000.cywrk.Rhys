@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="CS301_Class-000\CS301_Class\Source Files\distance.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="CS301_Class-000">
 <ExpandedNodeIds>
 <v>CS301_Class-000</v>
 <v>CS301_Class-000\CS301_Class</v>
@@ -32,20 +32,22 @@
 <v>CS301_Class-000\CS301_Class\Header Files\controlMotor.h</v>
 <v>CS301_Class-000\CS301_Class\Header Files\defines.h</v>
 <v>CS301_Class-000\CS301_Class\Header Files\distance.h</v>
+<v>CS301_Class-000\CS301_Class\Header Files\light_sensor.h</v>
 <v>CS301_Class-000\CS301_Class\Header Files\tacho.h</v>
 <v>CS301_Class-000\CS301_Class\Header Files\vars.h</v>
-<v>CS301_Class-000\CS301_Class\Header Files\windowRoller.h</v>
+<v>CS301_Class-000\CS301_Class\Header Files\window_roller.h</v>
 <v>CS301_Class-000\CS301_Class\Source Files</v>
 <v>CS301_Class-000\CS301_Class\Source Files\controlMotor.c</v>
 <v>CS301_Class-000\CS301_Class\Source Files\distance.c</v>
 <v>CS301_Class-000\CS301_Class\Source Files\main.c</v>
 <v>CS301_Class-000\CS301_Class\Source Files\tacho.c</v>
-<v>CS301_Class-000\CS301_Class\Source Files\windowRoller.c</v>
+<v>CS301_Class-000\CS301_Class\Source Files\window_roller.c</v>
 <v>CS301_Class-000\CS301_Class\commands</v>
 <v>CS301_Class-000\CS301_Class\Generated_Source</v>
 <v>CS301_Class-000\CS301_Class\Generated_Source\PSoC5</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
+<v>CS301_Class-000</v>
 <v>CS301_Class-000\CS301_Class</v>
 <v>CS301_Class-000\CS301_Class\TopDesign</v>
 <v>CS301_Class-000\CS301_Class\CS301_Class.cydwr</v>
@@ -62,17 +64,16 @@
 <v>CS301_Class-000\CS301_Class\Header Files\controlMotor.h</v>
 <v>CS301_Class-000\CS301_Class\Header Files\defines.h</v>
 <v>CS301_Class-000\CS301_Class\Header Files\distance.h</v>
+<v>CS301_Class-000\CS301_Class\Header Files\light_sensor.h</v>
 <v>CS301_Class-000\CS301_Class\Header Files\tacho.h</v>
 <v>CS301_Class-000\CS301_Class\Header Files\vars.h</v>
-<v>CS301_Class-000\CS301_Class\Header Files\windowRoller.h</v>
+<v>CS301_Class-000\CS301_Class\Header Files\window_roller.h</v>
 <v>CS301_Class-000\CS301_Class\Source Files</v>
 <v>CS301_Class-000\CS301_Class\Source Files\controlMotor.c</v>
 <v>CS301_Class-000\CS301_Class\Source Files\distance.c</v>
 <v>CS301_Class-000\CS301_Class\Source Files\main.c</v>
 <v>CS301_Class-000\CS301_Class\Source Files\tacho.c</v>
-<v>CS301_Class-000\CS301_Class\Source Files\windowRoller.c</v>
-<v>CS301_Class-000\CS301_Class\commands</v>
-<v>CS301_Class-000\CS301_Class\Generated_Source</v>
+<v>CS301_Class-000\CS301_Class\Source Files\window_roller.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -200,7 +201,7 @@
 <v>CS301_Class-000\CS301_Class\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_pm.lst</v>
 <v>CS301_Class-000\CS301_Class\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_std.lst</v>
 <v>CS301_Class-000\CS301_Class\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_vnd.lst</v>
-<v>CS301_Class-000\CS301_Class\CortexM3\ARM_GCC_541\Debug\Listing Files\windowRoller.lst</v>
+<v>CS301_Class-000\CS301_Class\CortexM3\ARM_GCC_541\Debug\Listing Files\window_roller.lst</v>
 <v>CS301_Class-000\CS301_Class\CortexM3\ARM_GCC_541\Debug\CS301_Class.elf</v>
 <v>CS301_Class-000\CS301_Class\CortexM3\ARM_GCC_541\Debug\CS301_Class.hex</v>
 <v>CS301_Class-000\CS301_Class\CortexM3\ARM_GCC_541\Debug\CS301_Class.map</v>
@@ -330,11 +331,9 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\tacho.h" />
-<name v=".\main.c" />
 <name v=".\controlMotor.c" />
-<name v=".\windowRoller.h" />
-<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\main.c" />
+<name v=".\distance.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -342,7 +341,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1040, 412" SelectedTabbedMdiWindow="b4c0d26b-cffc-44d3-8fcd-a594c6060e72"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="01cdfbbc-15e5-453d-8655-ee77c43656df" /><DocumentWindow Key="C:\Users\Commi\Documents\GitHub\project-team-16\CS301_Class.cydsn\tacho.h" Guid="5b7623dd-201e-4a0c-a692-acecf954c3fe" /><DocumentWindow Key="C:\Users\Commi\Documents\GitHub\project-team-16\CS301_Class.cydsn\main.c" Guid="1ff15df2-df70-4eba-b0d0-212c3b05e61d" /><DocumentWindow Key="C:\Users\Commi\Documents\GitHub\project-team-16\CS301_Class.cydsn\controlMotor.c" Guid="b4c0d26b-cffc-44d3-8fcd-a594c6060e72" /><DocumentWindow Key="C:\Users\Commi\Documents\GitHub\project-team-16\CS301_Class.cydsn\windowRoller.h" Guid="79a12b32-0030-4266-96bf-f42f205a7f81" /><DocumentWindow Key="C:\Users\Commi\Documents\GitHub\project-team-16\CS301_Class.cydsn\TopDesign\TopDesign.cysch" Guid="afb11cc9-ab17-40a1-889b-4ecc5d23c184" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1040, 427" SelectedTabbedMdiWindow="8914fd8a-1fdf-4026-b9fd-02c7f7bf3c53"><DocumentWindow Key="C:\Users\Commi\Documents\GitHub\301-PROJECT\CS301_Class.cydsn\controlMotor.c" Guid="8914fd8a-1fdf-4026-b9fd-02c7f7bf3c53" /><DocumentWindow Key="C:\Users\Commi\Documents\GitHub\301-PROJECT\CS301_Class.cydsn\main.c" Guid="e91b99f8-891c-4b1e-95a1-e32d2d86be3d" /><DocumentWindow Key="C:\Users\Commi\Documents\GitHub\301-PROJECT\CS301_Class.cydsn\distance.c" Guid="76299f20-4c84-4799-b004-feadfde582d8" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
