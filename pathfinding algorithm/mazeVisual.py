@@ -1,8 +1,8 @@
 import pygame
-import Astar 
-import dijkstra
+ 
 import BFS
-import DFS
+
+
 
 # Initialize Pygame
 pygame.init()
@@ -42,8 +42,8 @@ map = [
 ]
 
 # Define premade nodes
-food_list = [(1,9),
-	(5,5),
+food_list = [(5,5),
+	(1,9),
 	(7,1),
 	(13,5),
 	(9,9)]
@@ -104,7 +104,7 @@ def main():
                     end_node = food_list[current_node_index]
                     
                     # only change the file import to change the algorithm
-                    path = dijkstra.algorithm(map, start_pos, end_node)
+                    path = BFS.algorithm(map, start_pos, end_node)
 
                     if path:
                         path_length = len(path) - 1  # excluding the start node itself
