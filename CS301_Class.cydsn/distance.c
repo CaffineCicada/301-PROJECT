@@ -25,11 +25,11 @@ void distance (void){
     newL = newL * -1;
     totalTickDistanceLeft = (newL * 20)/228;
     
-    if(totalTickDistanceLeft == 200){
-        stop = 1;
-        QuadDec_M1_Stop();
-        Timer_1_Stop();
-    }
+    //if(totalTickDistanceLeft == 200){
+    //    stop = 1;
+    //    QuadDec_M1_Stop();
+    //    Timer_1_Stop();
+    //}
 
 }
 

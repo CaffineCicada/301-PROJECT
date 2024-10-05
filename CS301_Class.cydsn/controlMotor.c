@@ -21,6 +21,16 @@ float percentage1, percentage2 = 0.00;
 
 uint8_t leftTurnCount = 0;
 
+
+
+// to be passed in from the pathfinder algorithm
+//--------------------------------------------
+// 0 = North, 1 = East, 2 = South, 3 = West
+uint8_t pathInstructions[] = {0, 0, 1};
+uint8_t turnsUntilNextNode[] = {};
+uint8_t remainingDistance[] = {};
+//--------------------------------------------
+
 void motorControl() {
     
     if(stop == 1){
@@ -31,21 +41,21 @@ void motorControl() {
     }
             
     // light turn
-    else if(Q4 == 0) {
-        PWMLeftMotor = 160;
-        PWMRightMotor = 160;
-        PWM_1_WriteCompare(PWMLeftMotor);
-        PWM_2_WriteCompare(PWMRightMotor);
-    }
+//    else if(Q4 == 0) {
+//        PWMLeftMotor = 160;
+//        PWMRightMotor = 160;
+//       PWM_1_WriteCompare(PWMLeftMotor);
+//        PWM_2_WriteCompare(PWMRightMotor);
+//   }
     
     // left turn
-    else if(Q3 == 0) {
-        PWMLeftMotor = 90;
-        PWMRightMotor = 90;
-        PWM_1_WriteCompare(PWMLeftMotor);
-        PWM_2_WriteCompare(PWMRightMotor);
+//    else if(Q3 == 0) {
+//        PWMLeftMotor = 90;
+//        PWMRightMotor = 90;
+//        PWM_1_WriteCompare(PWMLeftMotor);
+//        PWM_2_WriteCompare(PWMRightMotor);
        
-    }
+//    }
     
     // adjust to the right
     else if(Q5 == 1 && Q6 == 0) {
@@ -63,6 +73,9 @@ void motorControl() {
         PWM_2_WriteCompare(PWMRightMotor);
     }
     
+    
+    // ignore (this works)
+    //---------------------------------------------------
     // Straight line
     else if(Q5 == 1 && Q6 == 1) {
         
@@ -81,6 +94,8 @@ void motorControl() {
         PWM_1_WriteCompare(PWMLeftMotor);
         PWM_2_WriteCompare(PWMRightMotor);
     }
+    //--------------------------------------------------
+    
     
 }
 
