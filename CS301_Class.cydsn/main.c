@@ -106,7 +106,7 @@ int main()
 
     usbPutString(displaystring);
     for(;;)
-    {
+    {        
         /* Place your application code here. */
         handle_usb();
         

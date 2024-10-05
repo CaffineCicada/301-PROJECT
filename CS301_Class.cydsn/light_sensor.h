@@ -25,11 +25,11 @@ struct LightSensor newLightSensor() {
 // Add a new sensor reading and update struct accordingly
 void updateLightSensor(struct LightSensor *sensor, uint16_t newReading) {
     addElement(&(sensor->data), newReading);
+    sensor->max = 0;
+    sensor->min = UINT16_MAX;
     // Update max and min
     for(int i=0; i < WINDOW_SIZE; i++) {
         uint16_t num = sensor->data.data[i];
-        sensor->max = 0;
-        sensor->min = UINT16_MAX;
 
         if(sensor->max < num) {
             sensor->max = num;
