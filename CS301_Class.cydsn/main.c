@@ -39,15 +39,15 @@ volatile int8 newLightResultsFlag = false;
 uint16_t motor_counter = 0;
 uint32_t quad1 = 0;
 uint32_t quad2 = 0;
-
+uint16_t Q5, Q6, Q4, Q2, Q1, Q3;
 
 CY_ISR(isr_eoc){
-    result[0] = ADC_CountsTo_mVolts(ADC_GetResult16(0)); // sensor Q1
-    result[1] = ADC_CountsTo_mVolts(ADC_GetResult16(1)); // sensor Q2
-    result[2] = ADC_CountsTo_mVolts(ADC_GetResult16(2)); // sensor Q3
-    result[3] = ADC_CountsTo_mVolts(ADC_GetResult16(3)); // sensor Q4
-    result[4] = ADC_CountsTo_mVolts(ADC_GetResult16(4)); // sensor Q5
-    result[5] = ADC_CountsTo_mVolts(ADC_GetResult16(5)); // sensor Q6
+    newLightResults[0] = ADC_CountsTo_mVolts(ADC_GetResult16(0)); // sensor Q1
+    newLightResults[1] = ADC_CountsTo_mVolts(ADC_GetResult16(1)); // sensor Q2
+    newLightResults[2] = ADC_CountsTo_mVolts(ADC_GetResult16(2)); // sensor Q3
+    newLightResults[3] = ADC_CountsTo_mVolts(ADC_GetResult16(3)); // sensor Q4
+    newLightResults[4] = ADC_CountsTo_mVolts(ADC_GetResult16(4)); // sensor Q5
+    newLightResults[5] = ADC_CountsTo_mVolts(ADC_GetResult16(5)); // sensor Q6
    
     newLightResultsFlag = 1;
 }
@@ -112,8 +112,8 @@ int main()
         
         // Update light sensor state with new readings
         if(newLightResultsFlag == true) {
-            for(i = 0; i < 6; i++) {
-                updateLightSensor(&lightSensors[i], results[i])
+            for(int i = 0; i < 6; i++) {
+                updateLightSensor(&lightSensors[i], newLightResults[i]);
             }
             newLightResultsFlag = false;
         }
