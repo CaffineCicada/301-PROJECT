@@ -128,11 +128,13 @@
 <dep name=".\Generated_Source\PSoC5\isr_quad.h" />
 <dep name=".\Generated_Source\PSoC5\project.h" />
 <dep name=".\Generated_Source\PSoC5\timer_clock_quad.h" />
+<dep name=".\actions.h" />
 <dep name=".\controlMotor.h" />
 <dep name=".\defines.h" />
 <dep name=".\distance.h" />
 <dep name=".\light_sensor.h" />
 <dep name=".\main.c" />
+<dep name=".\motor_power_control.h" />
 <dep name=".\tacho.h" />
 <dep name=".\vars.h" />
 <dep name=".\window_roller.h" />
@@ -251,11 +253,13 @@
 <file name=".\Generated_Source\PSoC5\isr_quad.h" />
 <file name=".\Generated_Source\PSoC5\project.h" />
 <file name=".\Generated_Source\PSoC5\timer_clock_quad.h" />
+<file name=".\actions.h" />
 <file name=".\controlMotor.h" />
 <file name=".\defines.h" />
 <file name=".\distance.h" />
 <file name=".\light_sensor.h" />
 <file name=".\main.c" />
+<file name=".\motor_power_control.h" />
 <file name=".\tacho.h" />
 <file name=".\vars.h" />
 <file name=".\window_roller.h" />
@@ -1995,6 +1999,10 @@
 <dep name=".\CortexM3\ARM_GCC_541\Debug\Q5_LED.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\Q6_LED.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\isr_motor.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Debug\timer_clock_quad.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Debug\Timer_1.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Debug\Timer_1_PM.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Debug\isr_quad.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\QuadDec_M1_Cnt16.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\QuadDec_M1_Cnt16_PM.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\QuadDec_M2_Cnt16.o" />
@@ -2018,10 +2026,6 @@
 <dep name=".\CortexM3\ARM_GCC_541\Debug\cyPm.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\CySpc.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\cyutils.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Debug\timer_clock_quad.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Debug\Timer_1.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Debug\Timer_1_PM.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Debug\isr_quad.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\CS301_Class.a" />
 <dep name="${CyRoot}\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_541\Debug\CyComponentLibrary.a" />
 </file>
@@ -2800,6 +2804,13 @@
 <v>Generated_Source\PSoC5\Q6_LED.h</v>
 <v>Generated_Source\PSoC5\isr_motor.c</v>
 <v>Generated_Source\PSoC5\isr_motor.h</v>
+<v>Generated_Source\PSoC5\timer_clock_quad.c</v>
+<v>Generated_Source\PSoC5\timer_clock_quad.h</v>
+<v>Generated_Source\PSoC5\Timer_1.c</v>
+<v>Generated_Source\PSoC5\Timer_1.h</v>
+<v>Generated_Source\PSoC5\Timer_1_PM.c</v>
+<v>Generated_Source\PSoC5\isr_quad.c</v>
+<v>Generated_Source\PSoC5\isr_quad.h</v>
 <v>Generated_Source\PSoC5\QuadDec_M1_Cnt16.c</v>
 <v>Generated_Source\PSoC5\QuadDec_M1_Cnt16.h</v>
 <v>Generated_Source\PSoC5\QuadDec_M1_Cnt16_PM.c</v>
@@ -2859,13 +2870,6 @@
 <v>Generated_Source\PSoC5\cycodeshareimport.ld</v>
 <v>Generated_Source\PSoC5\cycodeshareexport.ld</v>
 <v>Generated_Source\PSoC5\cycodeshareimport.scat</v>
-<v>Generated_Source\PSoC5\timer_clock_quad.c</v>
-<v>Generated_Source\PSoC5\timer_clock_quad.h</v>
-<v>Generated_Source\PSoC5\Timer_1.c</v>
-<v>Generated_Source\PSoC5\Timer_1.h</v>
-<v>Generated_Source\PSoC5\Timer_1_PM.c</v>
-<v>Generated_Source\PSoC5\isr_quad.c</v>
-<v>Generated_Source\PSoC5\isr_quad.h</v>
 </gen_list>
 <warp_dep>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\ieee\work\stdlogic.vif</v>
@@ -2875,9 +2879,9 @@
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
 </warp_dep>
-<deps_time v="133725612441568353" />
+<deps_time v="133726444946676709" />
 <top_block v="TopDesign" />
-<last_generation v="128" />
+<last_generation v="245" />
 <pdl_path v="" />
 <sw_packages />
 </CyGuid_925cc1e1-309e-4e08-b0a1-09a83c35b157>
@@ -2885,7 +2889,7 @@
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM3" v="133725631809709394" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM3" v="133726647738567819" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>
