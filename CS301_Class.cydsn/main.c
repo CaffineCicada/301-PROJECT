@@ -98,7 +98,7 @@ int main()
             warmupCount++;
         } 
     }
-
+    currentAction = newAction(GOING_STRAIGHT);
     usbPutString(displaystring);
     
     // Main loop
