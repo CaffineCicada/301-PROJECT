@@ -59,6 +59,7 @@ CY_ISR_PROTO(isr_eoc);
 
 int main()
 {
+    // Initialisation
     struct LightSensor lightSensors[6] = {
         newLightSensor(), newLightSensor(), newLightSensor(),
         newLightSensor(), newLightSensor(), newLightSensor(),

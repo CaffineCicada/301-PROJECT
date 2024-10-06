@@ -7,10 +7,17 @@
 
 #define BLACK_THRESHOLD 300
 
+// Stores all the information needed to process the result of a light sensor on the robot
 struct LightSensor {
     struct RollingWindow data;
     uint16_t max;
     uint16_t min;
+
+    // Describes the state/output of the light sensor. True means we are in the black.
+    // False means we are in the white.
+    //
+    // This should only be read from externally. It should never be directly manipulated 
+    // and should only be manipulated by updateLightSensor(...)
     bool underBlack;
 };
 
@@ -24,7 +31,7 @@ struct LightSensor newLightSensor() {
     return output;
 }
 
-// Add a new sensor reading and update struct accordingly
+// Processes a new sensor reading into the LightSensor struct given
 void updateLightSensor(struct LightSensor *sensor, uint16_t newReading) {
     addElement(&(sensor->data), newReading);
     sensor->max = 0;
