@@ -119,33 +119,45 @@ int main()
         }
         // Update LEDs
         if(lightSensors[0].underBlack) {
+            Q1 = false;
             Q1_LED_Write(0);
         } else {
+            Q1 = true;
             Q1_LED_Write(1);
         }
         if(lightSensors[1].underBlack) {
+            Q2 = false;
             Q2_LED_Write(0);
         } else {
+            Q2 = true;
             Q2_LED_Write(1);
         }
         if(lightSensors[2].underBlack) {
+            Q3 = false;
             Q3_LED_Write(0);
         } else {
+            Q3 = true;
             Q3_LED_Write(1);
         }
         if(lightSensors[3].underBlack) {
+            Q4 = false;
             Q4_LED_Write(0);
         } else {
+            Q4 = true;
             Q4_LED_Write(1);
         }
         if(lightSensors[4].underBlack) {
+            Q5 = false;
             Q5_LED_Write(0);
         } else {
+            Q5 = true;
             Q5_LED_Write(1);
         }
         if(lightSensors[5].underBlack) {
+            Q6 = false;
             Q6_LED_Write(0);
         } else {
+            Q6 = true;
             Q6_LED_Write(1);
         }
 
