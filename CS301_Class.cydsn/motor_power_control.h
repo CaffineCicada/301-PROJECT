@@ -22,7 +22,7 @@
 #include <math.h>
 
 // Helper clamping function
-float clamp (float val, float minval, float maxval )
+float clamp(float val, float minval, float maxval )
 {
     if(val < minval) {
         return minval;   
@@ -33,6 +33,7 @@ float clamp (float val, float minval, float maxval )
     return val;
 }
 
+    
 // Sets the power of the left motor.
 // 1.0 is full power forward. -1.0 is full power backward
 void setLeftPower(float power) {

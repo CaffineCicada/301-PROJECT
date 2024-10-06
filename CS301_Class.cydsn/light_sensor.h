@@ -49,5 +49,4 @@ void updateLightSensor(struct LightSensor *sensor, uint16_t newReading) {
     }
 }
 
-
 #endif

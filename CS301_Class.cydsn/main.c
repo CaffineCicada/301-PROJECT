@@ -23,11 +23,11 @@
 #include "defines.h"
 #include "vars.h"
 #include "tacho.h"
-#include "light_sensor.h"
-#include "controlMotor.h"
-#include "distance.h"
-#include "motor_power_control.h"
+//#include "light_sensor.h"
+//#include "distance.h"
+//#include "motor_power_control.h"
 #include "actions.h"
+#include "controlMotor.h"
 //* ========================================
 void usbPutString(char *s);
 void usbPutChar(char c);
@@ -54,22 +54,6 @@ CY_ISR(isr_eoc){
     newLightResultsFlag = 1;
 }
 
-CY_ISR(isr_motor){
-    motor_counter++;
-    
-    if(motor_counter == 1){
-        motorControl();
-        motor_counter = 0;
-    }
-    
-    
-    Timer_TS_ReadStatusRegister();
-}
-
-CY_ISR(isr_quad){
-    distance();
-    Timer_1_ReadStatusRegister();
-}
 
 CY_ISR_PROTO(isr_eoc);
 
@@ -91,8 +75,6 @@ int main()
     QuadDec_M1_Start();
     QuadDec_M2_Start();
     isr_eoc_StartEx(isr_eoc);
-    //isr_motor_StartEx(isr_motor);
-    //isr_quad_StartEx(isr_quad);
     
 
 // --------------------------------    
@@ -176,7 +158,12 @@ int main()
             Q6_LED_Write(1);
         }
         
+        // Decide next action if need be
+        if(currentAction.type == GOING_STRAIGHT || currentAction.stage == -1) {
+            motorControl(&currentAction);   
+        }
         
+        // Process current action
         updateMotorPID(&pid, getLeftCounter(), getRightCounter());
         processAction(&currentAction, &pid, lightSensors);
         setLeftPower(pid.leftPower);
