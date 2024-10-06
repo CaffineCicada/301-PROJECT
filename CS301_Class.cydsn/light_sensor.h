@@ -1,3 +1,5 @@
+#ifndef LIGHT_SENSOR_H
+#define LIGHT_SENSOR_H
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -18,7 +20,7 @@ struct LightSensor newLightSensor() {
     output.data = newWindow();
     output.max = 0;
     output.min = 0;
-    bool underBlack = 0;
+    output.underBlack = 0;
     return output;
 }
 
@@ -46,3 +48,6 @@ void updateLightSensor(struct LightSensor *sensor, uint16_t newReading) {
         sensor->underBlack = false;
     }
 }
+
+
+#endif

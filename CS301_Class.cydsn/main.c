@@ -26,6 +26,8 @@
 #include "light_sensor.h"
 #include "controlMotor.h"
 #include "distance.h"
+#include "motor_power_control.h"
+#include "actions.h"
 //* ========================================
 void usbPutString(char *s);
 void usbPutChar(char c);
@@ -77,7 +79,10 @@ int main()
         newLightSensor(), newLightSensor(), newLightSensor(),
         newLightSensor(), newLightSensor(), newLightSensor(),
     };
-
+    struct MotorPID pid = newMotorPID(0.0, 0.0);
+    struct Action currentAction = newAction(DO_NOTHING);
+    uint8 warmupCount = 0;
+    
     ADC_Start();
     Timer_TS_Start();
     Timer_1_Start();
@@ -86,12 +91,9 @@ int main()
     QuadDec_M1_Start();
     QuadDec_M2_Start();
     isr_eoc_StartEx(isr_eoc);
-    isr_motor_StartEx(isr_motor);
-    isr_quad_StartEx(isr_quad);
+    //isr_motor_StartEx(isr_motor);
+    //isr_quad_StartEx(isr_quad);
     
-    
-    PWM_1_WriteCompare(127);
-    PWM_2_WriteCompare(127);
 
 // --------------------------------    
 // ----- INITIALIZATIONS ----------
@@ -104,12 +106,24 @@ int main()
         
 //    RF_BT_SELECT_Write(0);
 
+    // Collect light information before proceeding to main loop
+    while(warmupCount < 20) {
+        if(newLightResultsFlag == true) {
+            for(int i = 0; i < 6; i++) {
+                updateLightSensor(&lightSensors[i], newLightResults[i]);
+            }
+            newLightResultsFlag = false;
+            warmupCount++;
+        } 
+    }
+
     usbPutString(displaystring);
+    
+    // Main loop
     for(;;)
     {        
         /* Place your application code here. */
         handle_usb();
-        
         // Update light sensor state with new readings
         if(newLightResultsFlag == true) {
             for(int i = 0; i < 6; i++) {
@@ -117,6 +131,7 @@ int main()
             }
             newLightResultsFlag = false;
         }
+        
         // Update LEDs
         if(lightSensors[0].underBlack) {
             Q1 = false;
@@ -160,7 +175,14 @@ int main()
             Q6 = true;
             Q6_LED_Write(1);
         }
+        
+        
+        updateMotorPID(&pid, getLeftCounter(), getRightCounter());
+        processAction(&currentAction, &pid, lightSensors);
+        setLeftPower(pid.leftPower);
+        setRightPower(pid.rightPower);
 
+        
         char buffer[64];
         sprintf(buffer, "Value1: %d , Value2: %d \r\n" , quad1, quad2);
 
@@ -174,7 +196,7 @@ int main()
         {
             usbPutString(line);
             flag_KB_string = 0;
-        }        
+        }
     }   
 }
 //* ========================================

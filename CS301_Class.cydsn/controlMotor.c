@@ -22,7 +22,7 @@ float percentage1, percentage2 = 0.00;
 uint8_t leftTurnCount = 0;
 
 // to be passed in from the pathfinder algorithm
-//--------------------------------------------
+//-------------------------------------------- 
 // 0 = North, 1 = East, 2 = South, 3 = West
 uint8_t pathInstructions[] = {0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 uint8_t turnsUntilNextNode[] = {13};

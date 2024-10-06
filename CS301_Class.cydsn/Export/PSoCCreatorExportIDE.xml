@@ -48,6 +48,8 @@
           <File BuildType="BUILD" Toolchain="">controlMotor.h</File>
           <File BuildType="BUILD" Toolchain="">distance.h</File>
           <File BuildType="BUILD" Toolchain="">light_sensor.h</File>
+          <File BuildType="BUILD" Toolchain="">motor_power_control.h</File>
+          <File BuildType="BUILD" Toolchain="">actions.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\Commi\Documents\GitHub\301-PROJECT\CS301_Class.cydsn\Generated_Source\PSoC5">
