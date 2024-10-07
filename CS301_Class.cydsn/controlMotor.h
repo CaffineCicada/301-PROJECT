@@ -12,6 +12,10 @@
 
 #ifndef MOTOR_CONTROL_H
 #define MOTOR_CONTROL_H
+#define N 0
+#define E 1
+#define S 2
+#define W 3
 
 #include <project.h>
 #include <distance.h>
@@ -29,13 +33,13 @@ uint8_t leftTurnCount = 0;
 // to be passed in from the pathfinder algorithm
 //-------------------------------------------- 
 // 0 = North, 1 = East, 2 = South, 3 = West
-uint8_t pathInstructions[] = {0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-uint8_t turnsUntilNextNode[] = {13};
-uint8_t remainingDistance[] = {0};
+uint8_t pathInstructions[] = {S, E, S, W, S, E, S, E, N, S, S, W, N, W, N, E, N, E, E, S, S, E, S, W, S, E, S, W, W, N, E, N, E, S};
+// uint8_t pathInstructions[] = {S, E, S, W, S,| E, S, E, N ,| S, S, W, N, W, N, E, N, E,| E, S, S,| E, S, W, S, E, S, W, W, N, E, N, E, S};
+uint8_t turnsUntilNextNode[] = {4, 3, 8, 2, 12};
+uint8_t remainingDistance[] = {36, 54, 52, 18, 36};
 uint8_t i, j = 0;
 uint8_t location = 1;
 uint8_t direction = 0;
-uint8_t lengthOfArray = sizeof(pathInstructions) / sizeof(pathInstructions[0]);
 //--------------------------------------------
 
 void motorControl(struct Action* act)
@@ -56,41 +60,82 @@ void motorControl(struct Action* act)
         // possible junction occurs
         if (Q3 == 0 || Q4 == 0)
         {
-            // if we have eaten all of the food nodes
-            // if (j == 5)
-            // {
-            //     // we have reached the end of the array and will stop (completed all nodes)
-            //     direction = 4;
-            // }
 
-            // // we have reached the end of the node
+            // // we have reached the end of the node (think more about)
+            // ------------------------------------------------
             // if (i == turnsUntilNextNode[j])
             // {
-            //     // implement travelling the remaining distance here
+            //  
+            //     distance = remainingDistance[j];
+            //     endNode = True;
+            //     godistiance(distance);
             //     j++;
-            //     i = 0;
+            //    i++;
+            //     
+            // ------------------------------------------------
+
+            // if (i == turnsUntilNextNode[j] + 1)
+            // //     // want to then determine the nature of the turn
+            // // go straight
+            // if ((pathInstructions[location + 1] == N && pathInstructions[location] == N) || (pathInstructions[location + 1] == E && pathInstructions[location] == E) || (pathInstructions[location + 1] == S && pathInstructions[location] == S) || (pathInstructions[location + 1] == W && pathInstructions[location] == W))
+            // {
+            //     break;
             // }
+            // // go left
+            // else if ((pathInstructions[location + 1] == N && pathInstructions[location] == E) || (pathInstructions[location + 1] == W && pathInstructions[location] == N) || (pathInstructions[location + 1] == E && pathInstructions[location] == S) || (pathInstructions[location + 1] == S && pathInstructions[location] == W))
+            // {
+            //     direction = 1;
+            // }
+
+            // // go right
+            // else if ((pathInstructions[location + 1] == S && pathInstructions[location] == E) || (pathInstructions[location + 1] == E && pathInstructions[location] == N) || (pathInstructions[location + 1] == W && pathInstructions[location] == S) || (pathInstructions[location + 1] == N && pathInstructions[location] == W))
+            // {
+            //     direction = 2;
+            // }
+
+            // // go back
+            // else if ((pathInstructions[location + 1] == N && pathInstructions[location] == S) || (pathInstructions[location + 1] == S && pathInstructions[location] == N) || (pathInstructions[location + 1] == E && pathInstructions[location] == W) || (pathInstructions[location + 1] == W && pathInstructions[location] == E))
+            // {
+            //     direction = 3;
+            // }
+
+            //     // if all of the nodes have been visited
+            //     if (j == 5) {
+            //         direction = 4;
+            //     }
+            //     location += 2;
+            // }
+
+            // i = 0;
+
+            //if ( i == turnsUntilNextNode[j] - 1)
+            // {
+            //  
+            //     distance = remainingDistance[j];
+            //     endNode = True;
+            //     
+            //     }
 
             // want to then determine the nature of the turn
             // go straight
-            if ((pathInstructions[location] == 0 && pathInstructions[location - 1] == 0) || (pathInstructions[location] == 1 && pathInstructions[location - 1] == 1) || (pathInstructions[location] == 2 && pathInstructions[location - 1] == 2) || (pathInstructions[location] == 3 && pathInstructions[location - 1] == 3))
+            if ((pathInstructions[location] == N && pathInstructions[location - 1] == N) || (pathInstructions[location] == E && pathInstructions[location - 1] == E) || (pathInstructions[location] == S && pathInstructions[location - 1] == S) || (pathInstructions[location] == W && pathInstructions[location - 1] == W))
             {
                 break;
             }
             // go left
-            else if ((pathInstructions[location] == 0 && pathInstructions[location - 1] == 1) || (pathInstructions[location] == 3 && pathInstructions[location - 1] == 0) || (pathInstructions[location] == 1 && pathInstructions[location - 1] == 2) || (pathInstructions[location] == 2 && pathInstructions[location - 1] == 3))
+            else if ((pathInstructions[location] == N && pathInstructions[location - 1] == E) || (pathInstructions[location] == W && pathInstructions[location - 1] == N) || (pathInstructions[location] == E && pathInstructions[location - 1] == S) || (pathInstructions[location] == S && pathInstructions[location - 1] == W))
             {
                 direction = 1;
             }
 
             // go right
-            else if ((pathInstructions[location] == 2 && pathInstructions[location - 1] == 1) || (pathInstructions[location] == 1 && pathInstructions[location - 1] == 0) || (pathInstructions[location] == 3 && pathInstructions[location - 1] == 2) || (pathInstructions[location] == 0 && pathInstructions[location - 1] == 3))
+            else if ((pathInstructions[location] == S && pathInstructions[location - 1] == E) || (pathInstructions[location] == E && pathInstructions[location - 1] == N) || (pathInstructions[location] == W && pathInstructions[location - 1] == S) || (pathInstructions[location] == N && pathInstructions[location - 1] == W))
             {
                 direction = 2;
             }
 
             // go back
-            else if ((pathInstructions[location] == 0 && pathInstructions[location - 1] == 2) || (pathInstructions[location] == 2 && pathInstructions[location - 1] == 0) || (pathInstructions[location] == 1 && pathInstructions[location - 1] == 3) || (pathInstructions[location] == 3 && pathInstructions[location - 1] == 1))
+            else if ((pathInstructions[location] == N && pathInstructions[location - 1] == S) || (pathInstructions[location] == S && pathInstructions[location - 1] == N) || (pathInstructions[location] == E && pathInstructions[location - 1] == W) || (pathInstructions[location] == W && pathInstructions[location - 1] == E))
             {
                 direction = 3;
             }
@@ -109,6 +154,10 @@ void motorControl(struct Action* act)
         {
             direction = 4;
         }
+        // if (endNode == True) {
+        //     godistiance(distance);
+        //     endNode = False;
+        // }
         direction = 0;
         break;
 
@@ -119,6 +168,10 @@ void motorControl(struct Action* act)
         {
             direction = 4;
         }
+        // if (endNode == True) {
+        //     godistiance(distance);
+        //     endNode = False;
+        // }
         direction = 0;
         break;
 
@@ -129,6 +182,10 @@ void motorControl(struct Action* act)
         {
             direction = 4;
         }
+        // if (endNode == True) {
+        //     godistiance(distance);
+        //     endNode = False;
+        // }
         direction = 0;
        
         break;
