@@ -20,6 +20,7 @@
 
 #include <project.h>
 #include <distance.h>
+// #include <math.h>
 #include "actions.h"
     
 
@@ -28,7 +29,7 @@ uint16_t travelDistance = 0;
 
 // to be passed in from the pathfinder algorithm
 //-------------------------------------------- 
-uint8_t pathInstructions[] = {};
+uint8_t pathInstructions[] = {RIGHT, 10};
 //--------------------------------------------
 uint8_t location = 0;
 uint8_t direction = 0;
@@ -52,7 +53,7 @@ void motorControl(struct Action* act)
         if (pathInstructions[location] != STRAIGHT && pathInstructions[location] != RIGHT && pathInstructions[location] != LEFT && pathInstructions[location] != TURN_AROUND && pathInstructions[location] != TERMINATE)
         {
             // convert distance cm to ticks
-            travelDistance = (pathInstructions[location] * 228) / 20;
+            travelDistance = (uint16_t)((pathInstructions[location] * 228) / 20);
             *act = newGoingStraightForX(travelDistance);
             location ++;
 
@@ -76,13 +77,13 @@ void motorControl(struct Action* act)
             // go left
             else if (pathInstructions[location] == LEFT)
             {
-                direction = 1;
+                direction = 2;
             }
 
             // go right
             else if (pathInstructions[location] == RIGHT)
             {
-                direction = 2;
+                direction = 1;
             }
 
             // go back
@@ -98,7 +99,7 @@ void motorControl(struct Action* act)
         break;
 
     case 1:
-        // turn left
+        // turn right
         *act = newAction(TURNING_LEFT);
         if (Q1 == 0 && Q2 == 0 && Q3 == 0 && Q4 == 0 && Q5 == 0 && Q6 == 0)
         {
@@ -108,7 +109,7 @@ void motorControl(struct Action* act)
         break;
 
     case 2:
-        // turn right
+        // turn left
         *act = newAction(TURNING_RIGHT);
         if (Q1 == 0 && Q2 == 0 && Q3 == 0 && Q4 == 0 && Q5 == 0 && Q6 == 0)
         {
