@@ -81,7 +81,7 @@ void processAction(struct Action* act, struct MotorPID* pid, struct LightSensor*
                     break;
                 case 1:
                     if(getLeftCounter() > act->data) {
-                        act->stage = -1; 
+                        act->stage++; 
                     }
                     // Robot is too far right
                     if(sensors[4].underBlack) {
@@ -94,6 +94,24 @@ void processAction(struct Action* act, struct MotorPID* pid, struct LightSensor*
                         setPowerTargets(pid, BASE_SPEED, BASE_SPEED);
                     }
                     break;
+                case 2:
+                    // the distance has been complete, now do a U-turn
+                    
+                    // Reset pid and decoder information
+                    setPowerTargets(pid, 0.0, 0.0);
+                    resetDistCounts(pid);
+                    resetCounters();
+                    act->stage++;
+                    break;
+                case 3:
+                    // Perform the turn
+                    setPowerTargets(pid, -BASE_SPEED, BASE_SPEED);
+                    if(getRightCounter() > 190) {
+                        setPowerTargets(pid, 0.0, 0.0);
+                        act->stage = -1;
+                    }
+                    break;
+                    
                 default:
                     // Sit still when complete
                     setPowerTargets(pid, 0.0, 0.0);

@@ -29,7 +29,7 @@ uint16_t travelDistance = 0;
 
 // to be passed in from the pathfinder algorithm
 //-------------------------------------------- 
-uint8_t pathInstructions[] = {RIGHT, 10};
+uint8_t pathInstructions[] = {36};
 //--------------------------------------------
 uint8_t location = 0;
 uint8_t direction = 0;

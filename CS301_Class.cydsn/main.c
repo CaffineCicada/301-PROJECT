@@ -159,10 +159,6 @@ int main()
             Q6_LED_Write(1);
         }
         
-        // Automatically do a 180deg turn after doing GOING_STRAIGHT_FOR_X
-        if(currentAction.type == GO_STRAIGHT_FOR_X && currentAction.stage == -1) {
-            currentAction = newAction(TURNING_AROUND);
-        }
 
         // Decide next action if need be
         if(currentAction.type == GOING_STRAIGHT || currentAction.stage == -1) {
