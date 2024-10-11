@@ -13,8 +13,8 @@
 #ifndef MOTOR_CONTROL_H
 #define MOTOR_CONTROL_H
 #define STRAIGHT 0
-#define LEFT 1
-#define RIGHT 2
+#define RIGHT 1
+#define LEFT 2
 #define TURN_AROUND 3
 #define TERMINATE 4
 
@@ -24,20 +24,14 @@
     
 
 extern uint16_t Q5, Q6, Q4, Q2, Q1, Q3;
-uint8_t Q3_Flag, Q4_Flag = 0;
-uint8_t PWMLeftMotor, PWMRightMotor = 127;
-const uint8_t percentageOfSpeed = 100;
-float percentage1, percentage2 = 0.00;
-
-uint8_t leftTurnCount = 0;
+uint16_t travelDistance = 0;
 
 // to be passed in from the pathfinder algorithm
 //-------------------------------------------- 
-// 0 = North, 1 = East, 2 = South, 3 = West
 uint8_t pathInstructions[] = {};
+//--------------------------------------------
 uint8_t location = 0;
 uint8_t direction = 0;
-//--------------------------------------------
 
 void motorControl(struct Action* act)
 {
@@ -54,29 +48,45 @@ void motorControl(struct Action* act)
             direction = 4;
         }
 
+        // if we need to go a certain distance
+        if (pathInstructions[location] != STRAIGHT && pathInstructions[location] != RIGHT && pathInstructions[location] != LEFT && pathInstructions[location] != TURN_AROUND && pathInstructions[location] != TERMINATE)
+        {
+            // convert distance cm to ticks
+            travelDistance = (pathInstructions[location] * 228) / 20;
+            *act = newGoingStraightForX(travelDistance);
+            location ++;
+
+        }
+
+        // we have reached the end of the array
+        if (pathInstructions[location] == TERMINATE)
+        {
+            direction = -1;
+        }
+
         // possible junction occurs
         if (Q3 == 0 || Q4 == 0)
         {
             // want to then determine the nature of the turn
             // go straight
-            if ((pathInstructions[location] == N && pathInstructions[location - 1] == N) || (pathInstructions[location] == E && pathInstructions[location - 1] == E) || (pathInstructions[location] == S && pathInstructions[location - 1] == S) || (pathInstructions[location] == W && pathInstructions[location - 1] == W))
+            if (pathInstructions[location] == STRAIGHT)
             {
                 break;
             }
             // go left
-            else if ((pathInstructions[location] == N && pathInstructions[location - 1] == E) || (pathInstructions[location] == W && pathInstructions[location - 1] == N) || (pathInstructions[location] == E && pathInstructions[location - 1] == S) || (pathInstructions[location] == S && pathInstructions[location - 1] == W))
+            else if (pathInstructions[location] == LEFT)
             {
                 direction = 1;
             }
 
             // go right
-            else if ((pathInstructions[location] == S && pathInstructions[location - 1] == E) || (pathInstructions[location] == E && pathInstructions[location - 1] == N) || (pathInstructions[location] == W && pathInstructions[location - 1] == S) || (pathInstructions[location] == N && pathInstructions[location - 1] == W))
+            else if (pathInstructions[location] == RIGHT)
             {
                 direction = 2;
             }
 
             // go back
-            else if ((pathInstructions[location] == N && pathInstructions[location - 1] == S) || (pathInstructions[location] == S && pathInstructions[location - 1] == N) || (pathInstructions[location] == E && pathInstructions[location - 1] == W) || (pathInstructions[location] == W && pathInstructions[location - 1] == E))
+            else if (pathInstructions[location] == TURN_AROUND)
             {
                 direction = 3;
             }
