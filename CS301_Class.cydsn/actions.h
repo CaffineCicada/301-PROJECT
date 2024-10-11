@@ -9,6 +9,7 @@
 
 enum ActionType {
     GOING_STRAIGHT, // Robot is travelling straight
+    GO_STRAIGHT_FOR_X, // Robot is travelling straight for a specific distance
     TURNING_RIGHT, // Robot is trying to turn 90deg right
     TURNING_LEFT, // Robot is trying to turn 90deg left
     TURNING_AROUND, // Robot is trying to turn 180deg left
@@ -17,21 +18,36 @@ enum ActionType {
 
 // Struct to hold information for an action/command for the robot.
 //
-// stage variable will be 0 at the starts of an action and -1 when action is complete. It is recommended
-// that this value is only read and never directly manipulated externally.
+// stage member variable will be 0 at the starts of an action and -1 when action is complete. It is 
+// recommended that this value is only read and never directly manipulated externally.
+//
+// data member variable is for internal use. Do not bother ever reading/writing to this externally.
 //
 // It is advised that new actions are only created with newAction(...) and that action structs
 // are manipulated from processAction(...).
 struct Action {
     enum ActionType type;
     int stage;
+    int data;
 };
 
 // Create a new action with proper/beginning staging information.
+//
+// If creating the action GO_STRAIGHT_FOR_X, use newGoingStraightForX(...)
 struct Action newAction(enum ActionType type) {
     struct Action act;
     act.type = type;
     act.stage = 0;
+    act.data = 0;
+    return act;
+}
+
+// Creates an new GO_STRAIGHT_FOR_X type action
+struct Action newGoingStraightForX(int dist) {
+    struct Action act;
+    act.type = GO_STRAIGHT_FOR_X;
+    act.stage = 0;
+    act.data = dist;
     return act;
 }
 
@@ -54,6 +70,35 @@ void processAction(struct Action* act, struct MotorPID* pid, struct LightSensor*
                 setPowerTargets(pid, BASE_SPEED, BASE_SPEED);
             }
             break;
+        case GO_STRAIGHT_FOR_X:
+            switch (act->stage) {
+                case 0:
+                    // Reset pid and decoder information
+                    setPowerTargets(pid, 0.0, 0.0);
+                    resetDistCounts(pid);
+                    resetCounters();
+                    act->stage++;
+                    break;
+                case 1:
+                    if(getLeftCounter() > act->data) {
+                        act->stage = -1; 
+                    }
+                    // Robot is too far right
+                    if(sensors[4].underBlack) {
+                        setPowerTargets(pid, BASE_SPEED, BASE_SPEED+CORRECTING_SPEED);
+                    }
+                    // Robot is too far left
+                    else if(sensors[5].underBlack) {
+                        setPowerTargets(pid, BASE_SPEED+CORRECTING_SPEED, BASE_SPEED);
+                    } else {
+                        setPowerTargets(pid, BASE_SPEED, BASE_SPEED);
+                    }
+                    break;
+                default:
+                    // Sit still when complete
+                    setPowerTargets(pid, 0.0, 0.0);
+                    break;
+            }
         case TURNING_AROUND:
             switch (act->stage) {
                 case 0:
